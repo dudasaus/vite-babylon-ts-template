@@ -1,5 +1,7 @@
 import "./style.css";
 import * as BABYLON from "@babylonjs/core";
+import "@babylonjs/loaders/glTF";
+import house from "./assets/house.glb";
 
 class App {
   readonly canvasElement: HTMLCanvasElement;
@@ -21,7 +23,7 @@ class App {
   }
 }
 
-function createStarterScene(app: App) {
+async function createStarterScene(app: App) {
   // Creates and positions a free camera
   const camera = new BABYLON.FreeCamera(
     "camera1",
@@ -48,14 +50,35 @@ function createStarterScene(app: App) {
   );
   // Move sphere upward 1/2 its height
   sphere.position.y = 1;
+  // Move the sphere over
+  sphere.position.x = -1.5;
   // Built-in 'ground' shape.
   BABYLON.MeshBuilder.CreateGround(
     "ground",
     { width: 6, height: 6 },
     app.scene
   );
+
+  // Load a mesh
+  console.log({ house });
+  const result = await BABYLON.SceneLoader.ImportMeshAsync(
+    "Cube", // The name of the node from the Blender scene.
+    house,
+    undefined,
+    app.scene
+  );
+  // When you import glb or gltf, the first mesh is always "root".
+  const houseMesh = result.meshes[0];
+  houseMesh.position = new BABYLON.Vector3(1.5, 0, 0);
+  // Rotate 90 degree along the Y axis to turn the house towards the camera.
+  // This good to know and also I messed up the rotation in Blender.
+  houseMesh.rotate(new BABYLON.Vector3(0, 1, 0), BABYLON.Tools.ToRadians(90));
 }
 
-const app = new App();
-createStarterScene(app);
-app.start();
+async function main() {
+  const app = new App();
+  await createStarterScene(app);
+  app.start();
+}
+
+main();
