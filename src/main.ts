@@ -1,7 +1,7 @@
 import "./style.css";
 import * as BABYLON from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
-import house from "./assets/house.glb";
+import houseUrl from "./assets/house.glb";
 
 class App {
   readonly canvasElement: HTMLCanvasElement;
@@ -60,13 +60,13 @@ async function createStarterScene(app: App) {
   );
 
   // Load a mesh
-  console.log({ house });
   const result = await BABYLON.SceneLoader.ImportMeshAsync(
-    "Cube", // The name of the node from the Blender scene.
-    house,
+    "House", // The name of the node from the Blender scene.
+    houseUrl,
     undefined,
     app.scene
   );
+  console.log(result);
   // When you import glb or gltf, the first mesh is always "root".
   const houseMesh = result.meshes[0];
   houseMesh.position = new BABYLON.Vector3(1.5, 0, 0);
