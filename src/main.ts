@@ -66,7 +66,6 @@ async function createStarterScene(app: App) {
     undefined,
     app.scene
   );
-  console.log(result);
   // When you import glb or gltf, the first mesh is always "root".
   const houseMesh = result.meshes[0];
   houseMesh.position = new BABYLON.Vector3(1.5, 0, 0);
