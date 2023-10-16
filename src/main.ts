@@ -2,26 +2,7 @@ import "./style.css";
 import * as BABYLON from "@babylonjs/core";
 import "@babylonjs/loaders/glTF";
 import houseUrl from "./assets/house.glb";
-
-class App {
-  readonly canvasElement: HTMLCanvasElement;
-  readonly engine: BABYLON.Engine;
-  readonly scene: BABYLON.Scene;
-
-  constructor(canvasElementSelector: string = "#app") {
-    this.canvasElement = document.querySelector(
-      canvasElementSelector
-    ) as HTMLCanvasElement;
-    this.engine = new BABYLON.Engine(this.canvasElement);
-    this.scene = new BABYLON.Scene(this.engine);
-  }
-
-  start() {
-    this.engine.runRenderLoop(() => {
-      this.scene.render();
-    });
-  }
-}
+import { App } from "./app";
 
 async function createStarterScene(app: App) {
   // Creates and positions a free camera
