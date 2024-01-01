@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.scss";
 import "@babylonjs/loaders/glTF";
 import { App } from "./app";
 import { FreeCamera } from "@babylonjs/core/Cameras/freeCamera";
