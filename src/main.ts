@@ -41,11 +41,11 @@ async function createStarterScene(app: App) {
     app.scene
   );
   // When you import glb or gltf, the first mesh is always "root".
-  const houseMesh = result.meshes[0];
-  houseMesh.position = new Vector3(1.5, 0, 0);
+  const rootMesh = result.meshes[0];
+  rootMesh.position = new Vector3(1.5, 0, 0);
   // Rotate 90 degree along the Y axis to turn the house towards the camera.
   // This good to know and also I messed up the rotation in Blender.
-  houseMesh.rotate(new Vector3(0, 1, 0), Tools.ToRadians(90));
+  rootMesh.rotate(new Vector3(0, 1, 0), Tools.ToRadians(90));
 }
 
 async function main() {
