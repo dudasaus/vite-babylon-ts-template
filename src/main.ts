@@ -5,9 +5,10 @@ import { FreeCamera } from "@babylonjs/core/Cameras/freeCamera";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
 import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder";
-import { SceneLoader } from "@babylonjs/core/Loading/sceneLoader";
+import { ImportMeshAsync } from "@babylonjs/core/Loading/sceneLoader";
 import { Tools } from "@babylonjs/core/Misc/tools";
 import { houseUrl } from "./asset_loader";
+import { AbstractMesh } from "@babylonjs/core";
 
 async function createStarterScene(app: App) {
   // Creates and positions a free camera
@@ -24,7 +25,7 @@ async function createStarterScene(app: App) {
   const sphere = MeshBuilder.CreateSphere(
     "sphere",
     { diameter: 2, segments: 32 },
-    app.scene
+    app.scene,
   );
   // Move sphere upward 1/2 its height
   sphere.position.y = 1;
@@ -34,18 +35,14 @@ async function createStarterScene(app: App) {
   MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, app.scene);
 
   // Load a mesh
-  const result = await SceneLoader.ImportMeshAsync(
-    undefined,
-    houseUrl,
-    undefined,
-    app.scene
-  );
-  // When you import glb or gltf, the first mesh is always "root".
+  const result = await ImportMeshAsync(houseUrl, app.scene);
   const rootMesh = result.meshes[0];
-  rootMesh.position = new Vector3(1.5, 0, 0);
-  // Rotate 90 degree along the Y axis to turn the house towards the camera.
-  // This good to know and also I messed up the rotation in Blender.
-  rootMesh.rotate(new Vector3(0, 1, 0), Tools.ToRadians(90));
+  if (rootMesh && rootMesh instanceof AbstractMesh) {
+    rootMesh.position = new Vector3(1.5, 0, 0);
+    // Rotate 90 degree along the Y axis to turn the house towards the camera.
+    // This good to know and also I messed up the rotation in Blender.
+    rootMesh.rotate(new Vector3(0, 1, 0), Tools.ToRadians(90));
+  }
 }
 
 async function main() {
