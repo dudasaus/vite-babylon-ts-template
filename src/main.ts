@@ -1,7 +1,7 @@
-import "./style.scss";
+import "@/style.scss";
 import "@babylonjs/loaders/glTF";
-import houseUrl from "./assets/house.glb";
-import { App } from "./app";
+import houseUrl from "@assets/house.glb";
+import { App } from "@/app";
 import { FreeCamera } from "@babylonjs/core/Cameras/freeCamera";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
 import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
