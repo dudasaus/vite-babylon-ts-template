@@ -1,5 +1,6 @@
 import "./style.scss";
 import "@babylonjs/loaders/glTF";
+import houseUrl from "./assets/house.glb";
 import { App } from "./app";
 import { FreeCamera } from "@babylonjs/core/Cameras/freeCamera";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
@@ -7,7 +8,6 @@ import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder";
 import { ImportMeshAsync } from "@babylonjs/core/Loading/sceneLoader";
 import { Tools } from "@babylonjs/core/Misc/tools";
-import { houseUrl } from "./asset_loader";
 import { AbstractMesh } from "@babylonjs/core";
 
 async function createStarterScene(app: App) {
